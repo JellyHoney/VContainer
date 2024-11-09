@@ -133,16 +133,6 @@ namespace VContainer.Microsoft.DependencyInjection
                 return false;
             }
 
-            if (serviceType.IsConstructedGenericType && serviceType.GetGenericTypeDefinition() is Type genericDefinition)
-            {
-                // We special case IEnumerable since it isn't explicitly registered in the container
-                // yet we can manifest instances of it when requested.
-                if (genericDefinition == typeof(IEnumerable<>))
-                    return true;
-
-                return mObjectResolver.TryGetRegistration(genericDefinition, out var _);
-            }
-
             return mObjectResolver.TryGetRegistration(serviceType, out var _);
         }
     }
