@@ -171,7 +171,7 @@ namespace VContainer.Internal
             // Constructor, single [Inject] constructor -> single most parameters constuctor
             var annotatedConstructorCount = 0;
             var maxParameters = -1;
-            foreach (var constructorInfo in typeInfo.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            foreach (var constructorInfo in typeInfo.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public))
             {
                 if (constructorInfo.IsDefined(typeof(InjectAttribute), false))
                 {
