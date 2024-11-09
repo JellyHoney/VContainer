@@ -54,13 +54,13 @@ namespace VContainer.Internal
 
         public void Add(Registration registration)
         {
-            foreach (var x in registrations)
-            {
-                if (x.Lifetime == Lifetime.Singleton && x.ImplementationType == registration.ImplementationType)
-                {
-                    throw new VContainerException(registration.ImplementationType, $"Conflict implementation type : {registration}");
-                }
-            }
+            //foreach (var x in registrations)
+            //{
+            //    if (x.Lifetime == Lifetime.Singleton && x.ImplementationType == registration.ImplementationType)
+            //    {
+            //        throw new VContainerException(registration.ImplementationType, $"Conflict implementation type : {registration}");
+            //    }
+            //}
             registrations.Add(registration);
         }
 
