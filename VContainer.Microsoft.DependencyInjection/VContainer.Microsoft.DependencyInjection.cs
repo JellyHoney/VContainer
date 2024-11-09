@@ -55,7 +55,7 @@ namespace VContainer.Microsoft.DependencyInjection
                 {
                     var provider = resolver.Resolve<IServiceProvider>();
                     return serviceDescriptor.ImplementationFactory(provider);
-                }, serviceDescriptor.ImplementationType, lifetime);
+                }, serviceDescriptor.ServiceType, lifetime);
                 builder.Register(registration);
             }
             else
