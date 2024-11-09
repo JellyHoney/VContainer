@@ -166,7 +166,12 @@ namespace VContainer
                     return CreateTrackedInstance(registration);
 
                 default:
-                    return registration.SpawnInstance(this);
+                    var instance = registration.SpawnInstance(this);
+                    if (instance is IDisposable disposable)
+                    {
+                        disposables.Add(disposable);
+                    }
+                    return instance;
             }
         }
 
@@ -302,7 +307,12 @@ namespace VContainer
                     return rootScope.Resolve(registration);
 
                 default:
-                    return registration.SpawnInstance(this);
+                    var instance = registration.SpawnInstance(this);
+                    if (instance is IDisposable disposableTransient)
+                    {
+                        disposables.Add(disposableTransient);
+                    }
+                    return instance;
             }
         }
     }
