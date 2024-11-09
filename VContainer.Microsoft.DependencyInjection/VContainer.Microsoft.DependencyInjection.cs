@@ -19,6 +19,7 @@ namespace VContainer.Microsoft.DependencyInjection
         {
             builder.Register<IServiceProvider>(resolver => new VContainerServiceProvider(resolver), Lifetime.Scoped);
             builder.Register<IServiceScopeFactory>(resolver => new VContainerScopedFactory(resolver), Lifetime.Singleton);
+            builder.Register<IServiceProviderIsService, VContainerIServiceProviderIsService>(Lifetime.Scoped);
 
             foreach (var service in serviceCollection)
             {
@@ -102,12 +103,10 @@ namespace VContainer.Microsoft.DependencyInjection
 
     public class VContainerScope : IServiceScope
     {
-        private IObjectResolver mObjectResolver;
         private VContainerServiceProvider mServiceProvider;
 
         public VContainerScope(IObjectResolver mObjectResolver)
         {
-            this.mObjectResolver = mObjectResolver;
             mServiceProvider = new VContainerServiceProvider(mObjectResolver);
         }
 
@@ -116,6 +115,21 @@ namespace VContainer.Microsoft.DependencyInjection
         public void Dispose()
         {
             mServiceProvider.Dispose();
+        }
+    }
+
+    public class VContainerIServiceProviderIsService : IServiceProviderIsService
+    {
+        private readonly IObjectResolver mObjectResolver;
+
+        public VContainerIServiceProviderIsService(IObjectResolver objectResolver)
+        {
+            this.mObjectResolver = objectResolver;
+        }
+
+        public bool IsService(Type serviceType)
+        {
+            return mObjectResolver.TryResolve(serviceType, out var _);
         }
     }
 }
