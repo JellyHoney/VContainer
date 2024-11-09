@@ -46,8 +46,7 @@ namespace VContainer.Microsoft.DependencyInjection
             var lifetime = Convert2VContainerLifetime(serviceDescriptor.Lifetime);
             if (serviceDescriptor.ImplementationInstance != null)
             {
-                var registraction = new InstanceRegistrationBuilder(serviceDescriptor.ImplementationInstance);
-                builder.Register(registraction);
+                builder.RegisterInstance(serviceDescriptor.ImplementationInstance).As(serviceDescriptor.ServiceType);
             }
             else if (serviceDescriptor.ImplementationFactory != null)
             {
