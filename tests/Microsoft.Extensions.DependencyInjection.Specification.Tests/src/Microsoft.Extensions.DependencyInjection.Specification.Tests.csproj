@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);nullable</NoWarn>
+    <EnableDefaultItems>true</EnableDefaultItems>
+    <CLSCompliant>false</CLSCompliant>
+	<IsTrimmable>false</IsTrimmable>
+	<LangVersion>10.0</LangVersion>
+    <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
+    <NoWarn>$(NoWarn);CA1852</NoWarn>
+    <!-- Public API in this assembly is only for tests and don't need to be documented. -->
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <IsPackable>true</IsPackable>
+    <PackageDescription>Suite of xUnit.net tests to check for container compatibility with Microsoft.Extensions.DependencyInjection.</PackageDescription>
+    <!-- this assembly doesn't need to be binplaced -->
+    <EnableBinPlacing>false</EnableBinPlacing>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0-rc.2.24473.5" />
+    <PackageReference Include="xunit.assert" Version="2.9.2" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.9.2" />
+  </ItemGroup>
+
+</Project>
